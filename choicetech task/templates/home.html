@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="text-center mt-5">My Data</h1>
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in data %}
+          <tr>
+            <td>{{ row[0] }}</td>
+            <td>{{ row[1] }}</td>
+            <td>{{ row[2] }}</td>
+            <td>
+              <form method="POST" action="{{ url_for('delete', index=loop.index0) }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <hr>
+
+      <h2 class="mt-5">Add New Record</h2>
+      <form method="POST" action="{{ url_for('add') }}">
+        <div class="form-group">
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" name="email" id="email" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone:</label>
+          <input type="tel" name="phone" id="phone" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Record</button>
+      </form>
+      <hr>
+
+      <h2 class="mt-5">Update Record</h2>
+      <table class="table mt-5">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in data %}
+          <tr>
+            <form action="/update" method="POST">
+              <input type="hidden" name="row_index" value="{{ loop.index | int }}">
+              <td><input type="text" name="name" value="{{ row[0] }}" class="form-control"></td>
+              <td><input type="email" name="email" value="{{ row[1] }}" class="form-control"></td>
+              <td><input type="tel" name="phone" value="{{ row[2] }}" class="form-control"></td>
+              <td><button type="submit" class="btn btn-success">Update</button></td>
+            </form>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/

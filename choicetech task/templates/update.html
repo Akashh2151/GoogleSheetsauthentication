@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Update Record</title>
+</head>
+<body>
+    <h1>Update Record</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.name.label }} {{ form.name }}
+        {{ form.email.label }} {{ form.email }}
+        {{ form.phone.label }} {{ form.phone }}
+        {{ form.submit }}
+    </form>
+    <a href="{{ url_for('home') }}">Cancel</a>
+</body>
+</html>
